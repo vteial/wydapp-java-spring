@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="${project.name}">
+
+	<skin>
+		<groupId>org.apache.maven.skins</groupId>
+		<artifactId>maven-fluido-skin</artifactId>
+		<version>1.2.1</version>
+	</skin>
+
+	<custom>
+		<fluidoSkin>
+			<sourceLineNumbersEnabled>true</sourceLineNumbersEnabled>
+			<gitHub>
+				<projectId>vteial/wydapp-java-spring</projectId>
+				<ribbonOrientation>right</ribbonOrientation>
+				<ribbonColor>black</ribbonColor>
+			</gitHub>
+			<googlePlusOne />
+		</fluidoSkin>
+	</custom>
+
+	<body>
+		<links>
+			<item name="App Site" href="http://wydapp-java-spring.cloudfoundry.com" />
+			<item name="Maven Site"
+				href="http://vteial.github.com/wydapp-java-spring/index.html" />
+		</links>
+		<menu ref="reports" />
+	</body>
+</project>
