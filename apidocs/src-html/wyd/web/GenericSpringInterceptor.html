@@ -1,0 +1,106 @@
+<HTML>
+<BODY BGCOLOR="white">
+<PRE>
+<FONT color="green">001</FONT>    package wyd.web;<a name="line.1"></a>
+<FONT color="green">002</FONT>    <a name="line.2"></a>
+<FONT color="green">003</FONT>    import javax.servlet.http.HttpServletRequest;<a name="line.3"></a>
+<FONT color="green">004</FONT>    import javax.servlet.http.HttpServletResponse;<a name="line.4"></a>
+<FONT color="green">005</FONT>    import javax.servlet.http.HttpSession;<a name="line.5"></a>
+<FONT color="green">006</FONT>    <a name="line.6"></a>
+<FONT color="green">007</FONT>    import org.slf4j.Logger;<a name="line.7"></a>
+<FONT color="green">008</FONT>    import org.slf4j.LoggerFactory;<a name="line.8"></a>
+<FONT color="green">009</FONT>    import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;<a name="line.9"></a>
+<FONT color="green">010</FONT>    <a name="line.10"></a>
+<FONT color="green">011</FONT>    import wyd.dto.WebMessage;<a name="line.11"></a>
+<FONT color="green">012</FONT>    <a name="line.12"></a>
+<FONT color="green">013</FONT>    public class GenericSpringInterceptor extends HandlerInterceptorAdapter {<a name="line.13"></a>
+<FONT color="green">014</FONT>    <a name="line.14"></a>
+<FONT color="green">015</FONT>            final Logger _log = LoggerFactory.getLogger(GenericSpringInterceptor.class);<a name="line.15"></a>
+<FONT color="green">016</FONT>    <a name="line.16"></a>
+<FONT color="green">017</FONT>            @Override<a name="line.17"></a>
+<FONT color="green">018</FONT>            public boolean preHandle(HttpServletRequest req, HttpServletResponse res,<a name="line.18"></a>
+<FONT color="green">019</FONT>                            Object handler) throws Exception {<a name="line.19"></a>
+<FONT color="green">020</FONT>                    WebMessage webMessage = WebMessage.createMessage(req);<a name="line.20"></a>
+<FONT color="green">021</FONT>                    if (webMessage != null) {<a name="line.21"></a>
+<FONT color="green">022</FONT>                            req.setAttribute("webMessage", webMessage);<a name="line.22"></a>
+<FONT color="green">023</FONT>                            if (_log.isDebugEnabled()) {<a name="line.23"></a>
+<FONT color="green">024</FONT>                                    _log.debug("WebMessage = {}", webMessage.toQueryString());<a name="line.24"></a>
+<FONT color="green">025</FONT>                            }<a name="line.25"></a>
+<FONT color="green">026</FONT>                    }<a name="line.26"></a>
+<FONT color="green">027</FONT>    <a name="line.27"></a>
+<FONT color="green">028</FONT>                    String callbackUri = req.getParameter("callbackUrl");<a name="line.28"></a>
+<FONT color="green">029</FONT>                    if (callbackUri != null) {<a name="line.29"></a>
+<FONT color="green">030</FONT>                            req.setAttribute("callbackUrl", callbackUri);<a name="line.30"></a>
+<FONT color="green">031</FONT>                            if (_log.isDebugEnabled()) {<a name="line.31"></a>
+<FONT color="green">032</FONT>                                    _log.debug("Callback URI = {}", callbackUri);<a name="line.32"></a>
+<FONT color="green">033</FONT>                            }<a name="line.33"></a>
+<FONT color="green">034</FONT>                    }<a name="line.34"></a>
+<FONT color="green">035</FONT>    <a name="line.35"></a>
+<FONT color="green">036</FONT>                    HttpSession session = req.getSession(true);<a name="line.36"></a>
+<FONT color="green">037</FONT>    <a name="line.37"></a>
+<FONT color="green">038</FONT>                    return super.preHandle(req, res, handler);<a name="line.38"></a>
+<FONT color="green">039</FONT>            }<a name="line.39"></a>
+<FONT color="green">040</FONT>    }<a name="line.40"></a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+</BODY>
+</HTML>
