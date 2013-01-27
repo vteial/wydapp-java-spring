@@ -19,7 +19,7 @@
 	<body>
 		<links>
 			<item name="App Site"
-				href="http://wydapp-java-spring.cloudfoundry.com/index.html" />
+				href="http://wydapp-java-spring.cloudfoundry.com" />
 			<item name="Maven Siteo"
 				href="http://vteial.github.com/wydapp-java-spring/index.html" />
 		</links>
