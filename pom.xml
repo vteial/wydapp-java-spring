@@ -2,14 +2,62 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
+
 	<groupId>wyd.maven.archetypes</groupId>
 	<artifactId>wyd-app-java-springmvc</artifactId>
-	<packaging>war</packaging>
-	<version>0.0.1</version>
-	<name>Wyd App Java Spring MVC</name>
+	<version>0.0.1-SNAPSHOT</version>
 
-	<url>https://github.com/vteial</url>
-	<description>A Maven project using SpringMVC 3.1.x, Twitter Bootstrap, jQuery and Log4j/Logback configuration.</description>
+	<packaging>war</packaging>
+
+	<name>WydApp Java Spring</name>
+	<url>https://github.com/vteial/wydapp-java-spring</url>
+	<description>Maven, Java and Spring Template Application.</description>
+
+	<licenses>
+		<license>
+			<name>Apache License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0</url>
+			<distribution>repo</distribution>
+			<comments>Same as Twitter Bootstrap</comments>
+		</license>
+	</licenses>
+
+	<inceptionYear>2012</inceptionYear>
+
+	<scm>
+		<url>https://github.com/vteial/wydapp-java-spring</url>
+		<connection>scm:git:git@github.com:vteial/wydapp-java-spring.git</connection>
+		<developerConnection>scm:git:git@github.com:vteial/wydapp-java-spring.git</developerConnection>
+		<tag>HEAD</tag>
+	</scm>
+
+	<issueManagement>
+		<system>github</system>
+		<url>https://github.com/vteial/wydapp-java-spring/issues</url>
+	</issueManagement>
+
+	<organization>
+		<name>vteial</name>
+		<url>http://vteial.github.com</url>
+	</organization>
+
+	<developers>
+		<developer>
+			<id>vteial</id>
+			<name>Eialarasu</name>
+			<url>http://vteial.github.com</url>
+			<roles>
+				<role>lead</role>
+				<role>architect</role>
+				<role>developer</role>
+			</roles>
+			<timezone>+5.30</timezone>
+		</developer>
+	</developers>
+
+	<ciManagement>
+		<system>travis-ci.org</system>
+	</ciManagement>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -36,88 +84,11 @@
 		<maven.compiler.plugin>2.3.2</maven.compiler.plugin>
 		<maven.failsafe.plugin>2.4.3-alpha-1</maven.failsafe.plugin>
 
+		<github.sites.plugin.version>0.7</github.sites.plugin.version>
+		<github.downloads.plugin.version>0.6</github.downloads.plugin.version>
+
 		<skipTests>true</skipTests>
 	</properties>
-
-	<build>
-		<finalName>${project.artifactId}</finalName>
-		<resources>
-			<resource>
-				<directory>src/main/resources</directory>
-				<filtering>true</filtering>
-			</resource>
-		</resources>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>${maven.compiler.plugin}</version>
-				<configuration>
-					<source>${java.version}</source>
-					<target>${java.version}</target>
-					<encoding>${project.build.sourceEncoding}</encoding>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>failsafe-maven-plugin</artifactId>
-				<version>${maven.failsafe.plugin}</version>
-				<configuration>
-					<skipTests>${skipTests}</skipTests>
-				</configuration>
-				<executions>
-					<execution>
-						<goals>
-							<goal>integration-test</goal>
-							<goal>verify</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-war-plugin</artifactId>
-				<configuration>
-					<archive>
-						<manifest>
-							<addClasspath>true</addClasspath>
-							<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
-							<addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
-						</manifest>
-					</archive>
-					<warSourceExcludes>WEB-INF/lib/*.jar, WEB-INF/classes/**</warSourceExcludes>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
-
-	<repositories>
-
-		<repository>
-			<id>central-1</id>
-			<name>Central Repository 1</name>
-			<url>http://repo1.maven.org/maven2</url>
-		</repository>
-
-		<repository>
-			<id>spring-maven-release</id>
-			<name>Spring Maven Release Repository</name>
-			<url>http://maven.springframework.org/release</url>
-		</repository>
-
-		<repository>
-			<id>spring-maven-milestone</id>
-			<name>Spring Maven Milestone Repository</name>
-			<url>http://maven.springframework.org/milestone</url>
-		</repository>
-
-		<repository>
-			<id>repository.jboss.org</id>
-			<name>JBoss Repository</name>
-			<url>http://repository.jboss.org/nexus/content/groups/public-jboss/</url>
-		</repository>
-
-	</repositories>
 
 	<dependencies>
 		<dependency>
@@ -333,4 +304,258 @@
 		</dependency>
 
 	</dependencies>
+
+
+	<reporting>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>2.8.1</version>
+				<configuration>
+					<encoding>${project.build.sourceEncoding}</encoding>
+					<locale>en</locale>
+					<linksource>true</linksource>
+					<validateLinks>true</validateLinks>
+					<overview>${basedir}/src/main/java/wyd/overview.html</overview>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-report-plugin</artifactId>
+				<version>2.9</version>
+				<configuration>
+					<includes>
+						<include>**/*Test.java</include>
+					</includes>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+		</plugins>
+	</reporting>
+
+	<profiles>
+
+		<profile>
+			<id>release-sign-artifacts</id>
+			<activation>
+				<property>
+					<name>performRelease</name>
+					<value>true</value>
+				</property>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-gpg-plugin</artifactId>
+						<version>1.4</version>
+						<executions>
+							<execution>
+								<id>sign-artifacts</id>
+								<phase>verify</phase>
+								<goals>
+									<goal>sign</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+
+		<profile>
+			<id>dev</id>
+		</profile>
+
+	</profiles>
+
+	<build>
+		<finalName>${project.artifactId}</finalName>
+
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+				<excludes>
+					<exclude>**/*.java</exclude>
+				</excludes>
+			</resource>
+			<resource>
+				<directory>src/main/java</directory>
+				<filtering>true</filtering>
+				<excludes>
+					<exclude>**/*.java</exclude>
+				</excludes>
+			</resource>
+		</resources>
+
+		<plugins>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${maven.compiler.plugin}</version>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+					<encoding>${project.build.sourceEncoding}</encoding>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>failsafe-maven-plugin</artifactId>
+				<version>${maven.failsafe.plugin}</version>
+				<configuration>
+					<skipTests>${skipTests}</skipTests>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>integration-test</goal>
+							<goal>verify</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.1.1</version>
+				<executions>
+					<execution>
+						<phase>compile</phase>
+						<goals>
+							<goal>exploded</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<archive>
+						<manifest>
+							<addClasspath>true</addClasspath>
+							<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+							<addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+						</manifest>
+					</archive>
+					<warSourceExcludes>WEB-INF/lib/*.jar, WEB-INF/classes/**</warSourceExcludes>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>2.8.1</version>
+				<configuration>
+					<encoding>${project.build.sourceEncoding}</encoding>
+					<locale>en</locale>
+					<linksource>true</linksource>
+					<validateLinks>true</validateLinks>
+					<!-- <links> <link>http://google-web-toolkit.googlecode.com/svn/javadoc/2.4</link> 
+						</links> -->
+					<overview>${basedir}/src/main/java/wyd/overview.html</overview>
+				</configuration>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-site-plugin</artifactId>
+				<version>3.0</version>
+				<dependencies>
+					<dependency>
+						<groupId>org.apache.maven.doxia</groupId>
+						<artifactId>doxia-module-markdown</artifactId>
+						<version>1.3</version>
+					</dependency>
+				</dependencies>
+				<configuration>
+					<locales>en</locales>
+					<inputEncoding>UTF-8</inputEncoding>
+					<outputEncoding>UTF-8</outputEncoding>
+				</configuration>
+			</plugin>
+
+			<!-- deploy maven site files to github. if you need deploy maven site 
+				files, Run `mvn site -Dgithub.global.userName={your username in github} -Dgithub.global.password={your 
+				password in github}` -->
+			<plugin>
+				<groupId>com.github.github</groupId>
+				<artifactId>site-maven-plugin</artifactId>
+				<version>${github.sites.plugin.version}</version>
+				<configuration>
+					<message>Building site for ${project.version}</message>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>site</goal>
+						</goals>
+						<phase>site</phase>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>com.github.github</groupId>
+				<artifactId>downloads-maven-plugin</artifactId>
+				<version>${github.downloads.plugin.version}</version>
+				<configuration>
+					<description>${project.version} release of ${project.name}</description>
+					<override>true</override>
+					<includeAttached>true</includeAttached>
+				</configuration>
+			</plugin>
+
+		</plugins>
+
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-release-plugin</artifactId>
+					<version>2.3.2</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+
+	</build>
+
+	<repositories>
+
+		<repository>
+			<id>central-1</id>
+			<name>Central Repository 1</name>
+			<url>http://repo1.maven.org/maven2</url>
+		</repository>
+
+		<repository>
+			<id>spring-maven-release</id>
+			<name>Spring Maven Release Repository</name>
+			<url>http://maven.springframework.org/release</url>
+		</repository>
+
+		<repository>
+			<id>spring-maven-milestone</id>
+			<name>Spring Maven Milestone Repository</name>
+			<url>http://maven.springframework.org/milestone</url>
+		</repository>
+
+		<repository>
+			<id>repository.jboss.org</id>
+			<name>JBoss Repository</name>
+			<url>http://repository.jboss.org/nexus/content/groups/public-jboss/</url>
+		</repository>
+
+	</repositories>
+
 </project>
